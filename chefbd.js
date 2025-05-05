@@ -6,11 +6,12 @@ async function fetchJson(url) {
 
 
 async function getChefBirthday(id) {
-  const ricetta = await fetchJson(`https://dummyjson.com/recipes/{id}`);
-  const chef = await fetchJson(`https://dummyjson.com/users/{userId}`);
-  return {...ricetta, chef};
+  const ricetta = await fetchJson(`https://dummyjson.com/recipes/${id}`);
+  const chef = await fetchJson(`https://dummyjson.com/users/${ricetta.userId}`); 
+  return chef.birthDate;
 }
 
 getChefBirthday(1)
-  .then(ricetta => console.log("Data di nascita dello chef:", ricetta))
+  .then(birthDate => console.log("Data di nascita dello chef:", birthDate))
   .catch(error => console.error("Errore:", error.message));
+
